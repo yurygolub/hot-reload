@@ -1,0 +1,4 @@
+void greet(void)
+{
+    return;
+}

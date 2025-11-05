@@ -1,4 +1,7 @@
+#include <stdio.h>
+#include "plugin.h"
+
 void greet(void)
 {
-    return;
+    printf("Greetings");
 }

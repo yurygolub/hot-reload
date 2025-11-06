@@ -1,8 +1,17 @@
 CC=clang
 
-C_FLAGS=-Wall -Wextra -O0 -g
+DEBUG_FLAGS=-O0 -g
+OPT=-Os
+
+C_FLAGS=-Wall -Wextra
+
+ifeq ($(CONFIG),debug)
+    C_FLAGS += $(DEBUG_FLAGS)
+else
+    C_FLAGS += $(OPT)
+endif
 
 all:
 	@mkdir -p build
-	$(CC) $(C_FLAGS) -c -o build/plugin.lib plugin.c
-	$(CC) $(C_FLAGS) -o build/main.exe main.c -L build -l plugin
+	$(CC) $(C_FLAGS) -o build/plugin.dll -shared plugin.c
+	$(CC) $(C_FLAGS) -o build/main.exe main.c

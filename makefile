@@ -3,8 +3,13 @@ OPT=-Os
 
 C_FLAGS=-Wall -Wextra
 
+PLUGIN=plugin.dll
+BIN=main.exe
+
 ifneq ($(CC),clang)
     OPT += -s
+    PLUGIN=plugin.so
+    BIN=main
 endif
 
 ifeq ($(CONFIG),debug)
@@ -15,5 +20,5 @@ endif
 
 all:
 	@mkdir -p build
-	$(CC) $(C_FLAGS) -o build/plugin.so -shared plugin.c
-	$(CC) $(C_FLAGS) -o build/main main.c
+	$(CC) $(C_FLAGS) -o build/$(PLUGIN) -shared plugin.c
+	$(CC) $(C_FLAGS) -o build/$(BIN) main.c

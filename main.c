@@ -24,6 +24,7 @@ bool reload_plugin(void)
 #ifdef _WIN32
     if (plugin != NULL)
     {
+        printf("INFO: freeing library '%s'\r\n", plugin_file_name);
         FreeLibrary(plugin);
     }
 
@@ -68,8 +69,8 @@ int main(void)
     if (!reload_plugin()) return 1;
 
     greet();
-    char input[10];
-    scanf_s("%s", input);
+    printf("Press Enter to continue...");
+    getchar();
 
     if (!reload_plugin()) return 1;
     greet();

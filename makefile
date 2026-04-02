@@ -3,13 +3,21 @@ OPT=-Os
 
 C_FLAGS=-Wall -Wextra
 
-PLUGIN=plugin.dll
-BIN=main.exe
-
 ifneq ($(CC),clang)
     OPT += -s
-    PLUGIN=plugin.so
-    BIN=main
+endif
+
+ifeq ($(OS),Windows_NT)
+    PLUGIN=plugin.dll
+    BIN=main.exe
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        PLUGIN=plugin.so
+        BIN=main
+    else
+        $(error platform not supported)
+    endif
 endif
 
 ifeq ($(CONFIG),debug)

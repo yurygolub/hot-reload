@@ -45,6 +45,13 @@ bool reload_plugin(void)
         return false;
     }
 #else
+    if (plugin != NULL)
+    {
+        printf("INFO: closing library '%s'\n", plugin_file_name);
+        dlclose(plugin);
+    }
+
+    printf("INFO: loading library '%s'\n", plugin_file_name);
     plugin = dlopen(plugin_file_name, RTLD_NOW);
     if (plugin == NULL)
     {
@@ -53,6 +60,7 @@ bool reload_plugin(void)
     }
 
     const char *greet_func_name = "greet";
+    printf("INFO: loading symbol '%s'\n", greet_func_name);
     greet = (greet_t)dlsym(plugin, greet_func_name);
     if (greet == NULL)
     {

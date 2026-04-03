@@ -16,6 +16,8 @@ static const char *plugin_file_name = "plugin.dll";
 static const char *plugin_file_name = "plugin.so";
 #endif // _WIN32
 
+static const char *greet_func_name = "greet";
+
 static void *plugin = NULL;
 static greet_t greet = NULL;
 
@@ -36,7 +38,6 @@ bool reload_plugin(void)
         return false;
     }
 
-    const char *greet_func_name = "greet";
     printf("INFO: loading symbol '%s'\r\n", greet_func_name);
     greet = (greet_t)GetProcAddress(plugin, greet_func_name);
     if (greet == NULL)
@@ -59,7 +60,6 @@ bool reload_plugin(void)
         return false;
     }
 
-    const char *greet_func_name = "greet";
     printf("INFO: loading symbol '%s'\n", greet_func_name);
     greet = (greet_t)dlsym(plugin, greet_func_name);
     if (greet == NULL)

@@ -9,8 +9,6 @@
 
 #ifdef _WIN32
 DECLSPEC void greet(void);
-#else
-typedef void (*greet_t)(void);
 #endif // _WIN32
 
 #endif // PLUGIN_H_
